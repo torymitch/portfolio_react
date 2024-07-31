@@ -32,10 +32,6 @@ export default function TestForm() {
       } else {
         document.body.classList.remove('active-modal')
       }
-    function search(formData) {
-        const query = formData.get("query");
-        alert(`You serach for '${query}'`);
-    }
     return (
     <>
         <button onClick={toggleForm} className="btn-modal">
@@ -49,19 +45,32 @@ export default function TestForm() {
                 <div className="modal-content">
                 <h2>Populate The Form</h2>
                 <p>
-                    {/* This is a test of some modal */}
-                    <form action={search}>
-                        <div><label>First Name: <input name="firstName" type="text" value={formData.firstName} onChange={handleInputChange}/></label></div>
-                        <div> 
-                            <label>
-                                Last Name: <input name="lastName" type="text" value={formData.lastName} onChange={handleInputChange}/>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Admin: <input name="admin" type="checkbox" value={formData.admin} onChange={handleInputChange}/>
-                            </label>
-                        </div>
+                    <form style={{ display: 'flex', flexDirection: 'column', maxWidth: '300px', margin: 'auto' }}>
+                    
+                        <input 
+                            type="text"
+                            name="firstName" 
+                            placeholder="First Name"
+                            value={formData.firstName} 
+                            onChange={handleInputChange}/>
+                        <input 
+                            type="text"
+                            name="lastName"  
+                            placeholder="Last Name"  
+                            value={formData.lastName} 
+                            onChange={handleInputChange}/>
+                        <label>
+                            <span>Admin</span>
+                            <input 
+                                type="checkbox"
+                                name="admin"
+                                placeholder="Admin"  
+                                aria-label="Admin"
+                                value={formData.admin} 
+                                onChange={handleInputChange}/>
+                        </label>
+                            
+
                         <div>
                             <button className="submit-form" onClick={submitForm}>SUBMIT</button>
                         </div>
