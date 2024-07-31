@@ -9,26 +9,22 @@ export default function TestForm() {
         setShowForm(!showForm);
     };
 
-    const [input1, setInput1] = useState('');
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        admin: '',
+    });
 
-    const handleInput1Change = (event) => {
-        setInput1(event.target.value);
+    const handleInputChange = (event) => {
+      const { name, value, type, checked } = event.target;
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: type === 'checkbox' ? checked : value,
+      }));
     };
-
-    const [input2, setInput2] = useState('');
-
-    const handleInput2Change = (event) => {
-        setInput2(event.target.value);
-    };
-
-    const [isChecked, setIsChecked] = useState(false);
-
-   const handleCheckboxChange = (event) => {
-       setIsChecked(event.target.checked);
-   };
     
     const submitForm = () => {
-        alert(`Input1 Is ${input1} && Input2 Is ${input2} && Checked is ${isChecked}`);
+        alert(`First Nane Is ${formData.firstName} && Last Name Is ${formData.lastName} && Admin is ${formData.admin}`);
     };
 
       if(showForm) {
@@ -55,19 +51,15 @@ export default function TestForm() {
                 <p>
                     {/* This is a test of some modal */}
                     <form action={search}>
+                        <div><label>First Name: <input name="firstName" type="text" value={formData.firstName} onChange={handleInputChange}/></label></div>
                         <div> 
                             <label>
-                                Input 1: <input name="input1" type="text" value={input1} onChange={handleInput1Change}/>
-                            </label>
-                        </div>
-                        <div> 
-                            <label>
-                                Input 2: <input name="input2" type="text" value={input2} onChange={handleInput2Change}/>
+                                Last Name: <input name="lastName" type="text" value={formData.lastName} onChange={handleInputChange}/>
                             </label>
                         </div>
                         <div>
                             <label>
-                                Checkbox: <input type="checkbox" value={isChecked} onChange={handleCheckboxChange}/>
+                                Admin: <input name="admin" type="checkbox" value={formData.admin} onChange={handleInputChange}/>
                             </label>
                         </div>
                         <div>
